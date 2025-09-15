@@ -5,11 +5,7 @@ slug: pilight
 description: Pilight server add-on
 url: "https://github.com/lgp1985/home-assistant.io-addon/tree/main/pilight"
 arch:
-- armhf
-- armv7
-- aarch64
-- amd64
-- i386
+- arm64
 init: false
 map:
 - share:rw
