@@ -1,20 +1,22 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
-name: Example add-on
-version: "1.2.0"
-slug: example
-description: Example add-on
-url: "https://github.com/home-assistant/addons-example/tree/main/example"
+name: Pilight
+version: "v8.1.5"
+slug: pilight
+description: Pilight server add-on
+url: "https://github.com/lgp1985/home-assistant.io-addon/tree/main/pilight"
 arch:
-  - armhf
-  - armv7
-  - aarch64
-  - amd64
-  - i386
+- armhf
+- armv7
+- aarch64
+- amd64
+- i386
 init: false
 map:
-  - share:rw
+- share:rw
 options:
-  message: "Hello world..."
-schema:
-  message: "str?"
-image: "ghcr.io/home-assistant/{arch}-addon-example"
+  gpio_platform: "str?"
+  hardware:
+    sender: 4
+    receiver: 24
+schema: false
+image: "lgp1985/pilight-addon"
