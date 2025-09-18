@@ -34,16 +34,21 @@ RUN apt-get update && apt-get install -y build-essential cmake git dialog
 
 FROM base-builder AS build-flex
 RUN apt-get install -y m4
-COPY --from=get-flex /tmp/* /tmp/
-WORKDIR /tmp
+COPY --from=get-flex /tmp/* /tmp/flex
+WORKDIR /tmp/flex
 RUN ./configure
 RUN make
 
 FROM base-builder AS build-libpcap
 
-RUN --mount=type=cache,from=build-flex,source=/tmp/,target=/tmp/flex \
-        cd /tmp/flex; \
-        make install
+# RUN --mount=type=cache,from=build-flex,source=/tmp/,target=/tmp/flex \
+#         cd /tmp/flex; \
+#         make install
+COPY --from=build-flex /tmp/* /tmp/flex/
+WORKDIR /tmp/flex
+RUN ls -la
+RUN make install
+RUN ldconfig
 
 COPY --from=get-libpcap /tmp/* /tmp/libpcap
 WORKDIR /tmp/libpcap
